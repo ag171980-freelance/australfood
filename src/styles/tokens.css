@@ -1,0 +1,128 @@
+/* =========================================================================
+   AUSTRALFOOD - Sistema de diseño
+   -------------------------------------------------------------------------
+   La comanda dejó de ser todo el lenguaje y pasó a ser una prueba: es lo
+   que la cocina recibe al final del flujo, no la metáfora que explica el
+   producto. Lo que explica el producto es la comida y el teléfono.
+
+   Paleta: se mantiene la familia original (papel térmico, tinta, pinche
+   rojo, sello verde). No es el crema editorial de toda landing generada
+   por IA: el papel está empujado al gris verdoso real y el acento es un
+   rojo de pinche saturado, no una terracota.
+
+   Forma: el radio cero quedó reservado únicamente al ticket, que es papel
+   cortado con sierra. Todo el resto de la interfaz es blando.
+   ========================================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* --- Color: papel ---------------------------------------------------- */
+  --papel: #efeae0;          /* fondo base, papel térmico crudo            */
+  --papel-alto: #f7f4ee;     /* comanda recién salida, superficie elevada  */
+  --papel-tibio: #f3ede1;    /* alterna secciones sin cambiar de familia   */
+  --papel-quemado: #ded5c5;  /* banda que pasó por el cabezal térmico      */
+  --papel-borde: #cec4b1;    /* troquelado, filos, hairlines               */
+
+  /* --- Color: tinta ---------------------------------------------------- */
+  --tinta: #16130f;          /* texto principal / fondo de secciones oscuras */
+  --tinta-alto: #221d17;     /* superficie elevada sobre tinta             */
+  --tinta-borde: #3a322a;    /* hairlines sobre tinta                      */
+
+  /* --- Color: acentos --------------------------------------------------- */
+  --pinche: #d63a2f;         /* acento primario: CTA, pinche del riel      */
+  --pinche-hover: #b92c22;
+  --pinche-lavado: rgba(214, 58, 47, 0.1);   /* fondos y estados suaves    */
+  --pagado: #2f7d52;         /* SOLO estados de confirmación / éxito       */
+  --pagado-claro: #6dbf8d;   /* el mismo verde, aclarado para fondos tinta  */
+  --pagado-lavado: rgba(47, 125, 82, 0.12);
+
+  /* --- Color: texto ---------------------------------------------------- */
+  --grafito: #6b6357;        /* secundario sobre papel                     */
+  --humo: #a79e8f;           /* secundario sobre tinta                     */
+
+  /* --- Tipografía ------------------------------------------------------ */
+  --f-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --f-body: 'Archivo', system-ui, -apple-system, sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', monospace;
+
+  /* Escala fluida. El display arranca muy grande y muy apretado: es una
+     grotesca condensada, aguanta el tracking negativo sin romperse.      */
+  --t-xs: 0.75rem;
+  --t-sm: 0.875rem;
+  --t-base: 1rem;
+  --t-lg: 1.125rem;
+  --t-xl: clamp(1.25rem, 0.9rem + 1.2vw, 1.5rem);
+  --t-2xl: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  --t-3xl: clamp(2.5rem, 1.4rem + 4.5vw, 4.5rem);
+  --t-4xl: clamp(3.5rem, 1.5rem + 8vw, 8rem);
+
+  --lh-tight: 0.9;
+  --lh-snug: 1.15;
+  --lh-body: 1.6;
+
+  --tr-display: -0.02em;     /* tracking del display, apretado            */
+  --tr-mono: 0.02em;
+  --tr-label: 0.14em;        /* eyebrows y labels, bien abiertos          */
+
+  /* --- Espacio --------------------------------------------------------- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+  --s-10: 8rem;
+
+  --seccion-y: clamp(4rem, 2rem + 8vw, 8rem);
+
+  /* --- Layout ---------------------------------------------------------- */
+  --ancho-max: 1180px;
+  --ancho-texto: 62ch;
+  --ancho-ticket: 27rem;     /* ancho de una comanda, el módulo base      */
+  --gutter: clamp(1.25rem, 0.5rem + 3vw, 3rem);
+
+  /* --- Bordes ---------------------------------------------------------- */
+  /* Una sola escala para toda la página. La regla es por rol, no por
+     capricho: interactivo chico = pill, superficie = medio, foto y panel
+     grande = grande. El ticket es la única excepción a radio cero.       */
+  --r-nada: 0;               /* SOLO la comanda: papel cortado con sierra  */
+  --r-xs: 6px;
+  --r-chico: 10px;
+  --r-medio: 16px;
+  --r-grande: 24px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+  --hair: 1px;
+
+  /* --- Sombra ---------------------------------------------------------- */
+  /* Tintada al tono del papel y difusa: los elementos se apoyan sobre la
+     página. Nada de negro puro, que sobre crudo se ve sucio.             */
+  --sombra-papel: 0 1px 2px rgba(63, 48, 33, 0.05), 0 8px 24px -14px rgba(63, 48, 33, 0.2);
+  --sombra-levantada: 0 2px 6px rgba(63, 48, 33, 0.07), 0 24px 48px -22px rgba(63, 48, 33, 0.32);
+  --sombra-flotante: 0 6px 12px rgba(63, 48, 33, 0.08), 0 44px 80px -30px rgba(63, 48, 33, 0.45);
+
+  /* --- Movimiento ------------------------------------------------------ */
+  /* El movimiento ya no imita el traqueteo de la impresora: acompaña. El
+     easing arranca rápido y frena largo, que es como se siente lo blando. */
+  --e-papel: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --e-golpe: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --e-suave: cubic-bezier(0.16, 1, 0.3, 1);
+  --d-rapido: 140ms;
+  --d-medio: 320ms;
+  --d-lento: 620ms;
+}
+
+/* La página se compromete con un solo look: papel bajo luz de cocina.
+   No hay variante oscura porque el papel es papel. Aun así respetamos
+   el contraste alto si el sistema lo pide. */
+@media (prefers-contrast: more) {
+  :root {
+    --grafito: #4a443a;
+    --humo: #c9c2b6;
+    --papel-borde: #a89c86;
+  }
+}

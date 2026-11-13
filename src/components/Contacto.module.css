@@ -1,0 +1,207 @@
+/* El formulario es la comanda al revés: en vez de salir de la cocina, entra.
+   Va directo sobre el papel de la página, sin tarjeta que lo encierre: no hay
+   jerarquía que comunicar porque es lo único que hay en la sección, así que el
+   panel era una caja alrededor de nada. Lo que lo agrupa ahora es el aire y el
+   centrado, no un borde. */
+
+.formulario {
+  display: grid;
+  gap: var(--s-5);
+
+  /* Centrado sobre la columna de la sección. El bloque se centra; las
+     etiquetas no: siguen alineadas a la izquierda sobre cada campo, que es
+     por donde entra la lectura al completarlo. */
+  width: min(100%, 44rem);
+  margin-inline: auto;
+}
+
+/* Nombre con apellido y email con teléfono: pares que se leen juntos.
+   align-items: start es necesario, no cosmético: sin eso las dos columnas se
+   igualan en alto y el campo sin texto de ayuda estira su input para rellenar
+   el hueco que deja el de al lado. */
+.fila {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--s-5);
+}
+
+.campo {
+  display: grid;
+  gap: var(--s-2);
+}
+
+/* La etiqueta va siempre arriba y siempre visible: el placeholder como
+   etiqueta desaparece justo cuando hace falta, al escribir. */
+.etiqueta {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+/* Los campos se invirtieron al sacar el panel. Antes el panel era papel alto y
+   el campo papel: el campo se leía por ser más oscuro que lo que lo rodeaba.
+   Sobre la página, que ya es papel, ese mismo relleno los volvía invisibles.
+   Ahora el campo es el claro y el borde pasó de --papel-borde a --grafito, que
+   contra el papel da 4,9:1 en vez de 1,4:1. Sin el marco del panel, el borde
+   es lo único que dice dónde se escribe, así que tiene que verse de verdad. */
+.control {
+  width: 100%;
+  padding: var(--s-3) var(--s-4);
+
+  background: var(--papel-alto);
+  border: var(--hair) solid var(--grafito);
+  border-radius: var(--r-xs);
+
+  font-size: var(--t-base);
+  line-height: var(--lh-body);
+  color: var(--tinta);
+
+  transition:
+    border-color var(--d-rapido) var(--e-papel),
+    box-shadow var(--d-rapido) var(--e-papel);
+}
+
+.control:hover {
+  border-color: var(--tinta);
+}
+
+/* El anillo de foco del teclado vive en :focus-visible y no se pisa. Esto es
+   para el foco con mouse: el borde sube a tinta y suma un halo, porque el
+   reposo ya usa el borde fuerte y con el color solo no se notaba el cambio. */
+.control:focus {
+  outline: none;
+  border-color: var(--tinta);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tinta) 10%, transparent);
+}
+
+.area {
+  resize: vertical;
+  min-height: 7rem;
+  font-family: inherit;
+}
+
+/* El select trae su propia flecha en cada sistema y queda desalineada con
+   el resto. Se apaga y se dibuja una sola, en tinta, con el mismo aire. */
+.control:is(select) {
+  appearance: none;
+  padding-right: var(--s-8);
+  background-image: linear-gradient(45deg, transparent 50%, var(--tinta) 50%),
+    linear-gradient(135deg, var(--tinta) 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.4rem) calc(50% + 2px),
+    calc(100% - 1rem) calc(50% + 2px);
+  background-size:
+    6px 6px,
+    6px 6px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.ayuda {
+  font-size: var(--t-sm);
+  line-height: var(--lh-body);
+  color: var(--grafito);
+}
+
+/* El error va debajo del campo, en el rojo del sistema, y nunca sustituye a
+   la etiqueta: quien vuelve al campo tiene que seguir sabiendo qué era. */
+.error {
+  font-family: var(--f-mono);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--pinche);
+}
+
+.control[aria-invalid='true'] {
+  border-color: var(--pinche);
+}
+
+/* --- Pie ----------------------------------------------------------------- */
+
+/* El pie se apila y se centra con el resto del bloque. Antes el botón y la
+   nota compartían renglón porque el panel les daba un ancho fijo donde
+   acomodarse; centrado, el botón al lado de un párrafo quedaba descolgado. */
+.pie {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-4);
+
+  margin-top: var(--s-3);
+  padding-top: var(--s-6);
+  border-top: var(--hair) dashed var(--papel-borde);
+  text-align: center;
+}
+
+.aviso {
+  max-width: 28rem;
+  font-size: var(--t-sm);
+  line-height: var(--lh-body);
+  color: var(--grafito);
+}
+
+.aviso:focus {
+  outline: none;
+}
+
+.avisoFalla {
+  font-weight: 600;
+  color: var(--pinche);
+}
+
+/* --- Confirmación -------------------------------------------------------- */
+
+/* La confirmación ocupa el lugar del formulario, así que se arma igual: sin
+   panel y centrada. El verde del sello pasa del borde de la caja, que ya no
+   existe, al tilde: sigue siendo el único lugar donde se usa, que es marcar
+   algo confirmado. */
+.gracias {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-5);
+
+  width: min(100%, 36rem);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.graciasTilde {
+  display: grid;
+  place-items: center;
+
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+
+  background: var(--pagado);
+  color: var(--papel-alto);
+
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.graciasTexto {
+  font-size: var(--t-lg);
+  line-height: var(--lh-body);
+  color: var(--tinta);
+  text-wrap: pretty;
+}
+
+/* --- Responsive ---------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  /* Los pares se parten: a 390px dos campos por fila dejan el label cortado. */
+  .fila {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* El botón a todo el ancho: centrado y angosto en una pantalla de teléfono
+     queda chico para el pulgar y descolgado del resto de los campos. */
+  .pie > :first-child {
+    justify-self: stretch;
+  }
+}

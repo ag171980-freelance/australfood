@@ -1,0 +1,134 @@
+.cierre {
+  position: relative;
+  padding-block: var(--seccion-y);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  background: var(--tinta);
+  color: var(--papel);
+  overflow: hidden;
+}
+
+/* Cocina en pleno servicio, muy bajada y desvanecida hacia abajo: da calor
+   al cierre sin pelearle contraste al texto ni a los botones. */
+.cierre::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/img/ambiente-cocina-lg.webp') center 30% / cover no-repeat;
+  opacity: 0.2;
+  filter: grayscale(0.4);
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 70%);
+  mask-image: linear-gradient(to bottom, #000, transparent 70%);
+  pointer-events: none;
+}
+
+.interior {
+  position: relative;
+  width: min(100% - var(--gutter) * 2, var(--ancho-max));
+  margin-inline: auto;
+  text-align: center;
+}
+
+.titulo {
+  max-width: 20ch;
+  margin-inline: auto;
+
+  font-family: var(--f-display);
+  font-size: var(--t-4xl);
+  font-weight: 900;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-display);
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.titulo em {
+  font-style: normal;
+  color: var(--pinche);
+}
+
+.bajada {
+  max-width: 40rem;
+  margin: var(--s-5) auto 0;
+  font-size: var(--t-lg);
+  color: var(--humo);
+  text-wrap: pretty;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-4);
+  margin-top: var(--s-7);
+}
+
+/* --- Pie ------------------------------------------------------------------ */
+
+.pie {
+  width: min(100% - var(--gutter) * 2, var(--ancho-max));
+  margin: var(--s-9) auto 0;
+  padding-top: var(--s-5);
+  border-top: var(--hair) solid var(--tinta-borde);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.04em;
+  color: var(--humo);
+}
+
+.marca {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--papel);
+  line-height: 1;
+}
+
+.marca::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pinche);
+}
+
+.enlacesPie {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-5);
+}
+
+.enlacesPie a {
+  transition: color var(--d-rapido) var(--e-papel);
+}
+
+.enlacesPie a:hover {
+  color: var(--papel);
+}
+
+/* Crédito de las fotos. Obligatorio por licencia, así que va visible, pero
+   en el escalón más bajo de la jerarquía del pie. */
+.creditos {
+  max-width: 60rem;
+  margin-inline: auto;
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  color: var(--humo);
+}
+
+.creditos a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

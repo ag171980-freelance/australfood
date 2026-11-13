@@ -1,0 +1,174 @@
+/* El recorrido completo, contado por lado del mostrador: qué gana el cliente
+   al pedir, y qué gana el local al recibir. La pastilla de cada tarjeta dice
+   de quién es la ventaja.
+
+   Formato: tira horizontal con scroll-snap. Es una secuencia, y leerla de
+   izquierda a derecha se parece más al recorrido del pedido que una lista
+   vertical con una raya debajo de cada fila. */
+
+.tira {
+  display: grid;
+  grid-auto-flow: column;
+  /* 4 x 13.5rem + gaps entra holgado en los 1180px del contenedor: en desktop
+     se ven los cuatro pasos sin scrollear, en pantallas chicas la tira
+     scrollea. Agregar un quinto paso vuelve a forzar scroll en desktop. */
+  grid-auto-columns: minmax(13.5rem, 1fr);
+  gap: var(--s-4);
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* El scroll se sale del contenedor hasta el borde para que la última
+     tarjeta no quede cortada contra el margen. */
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+  padding-bottom: var(--s-4);
+  scrollbar-width: thin;
+  scrollbar-color: var(--papel-borde) transparent;
+}
+
+/* Sin foto: las cuatro tarjetas tienen la misma estructura y el mismo alto,
+   que es lo que deja leer la fila como una secuencia. Antes dos llevaban
+   imagen al pie y las otras dos quedaban con un hueco del alto de la foto. */
+.paso {
+  scroll-snap-align: start;
+
+  display: flex;
+  flex-direction: column;
+  padding: var(--s-5);
+
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-grande);
+  background: var(--papel-alto);
+
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity var(--d-lento) var(--e-suave),
+    transform var(--d-lento) var(--e-suave),
+    box-shadow var(--d-medio) var(--e-suave);
+}
+
+.visible .paso {
+  opacity: 1;
+  transform: none;
+}
+
+.paso:hover {
+  box-shadow: var(--sombra-levantada);
+}
+
+.visible .paso:nth-child(1) { transition-delay: 0ms; }
+.visible .paso:nth-child(2) { transition-delay: 80ms; }
+.visible .paso:nth-child(3) { transition-delay: 160ms; }
+.visible .paso:nth-child(4) { transition-delay: 240ms; }
+
+/* Número y pastilla comparten renglón, alineados por la base. El número va a
+   la izquierda y a la misma altura en las cuatro tarjetas: leído de corrido
+   es lo que hace que la fila sea una secuencia y no cuatro fichas sueltas. */
+.marca {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* En la tira angosta de mobile los dos no entran en un renglón: antes de
+     apretarlos, la pastilla baja entera. */
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-3);
+}
+
+/* Disco en tinta, no en el rojo del pinche: el rojo ya lo usa la pastilla
+   para marcar el cambio de lado del mostrador, y dos rojos en el mismo
+   renglón harían competir el orden con el dueño del paso. */
+.numero {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+
+  background: var(--tinta);
+  color: var(--papel-alto);
+
+  font-family: var(--f-mono);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* La pastilla identifica de qué lado cae la ventaja del paso. */
+.lado {
+  display: inline-block;
+  padding: 2px var(--s-3);
+  border-radius: var(--r-pill);
+  /* Son dos palabras y una pastilla: partida en dos renglones no se lee. */
+  white-space: nowrap;
+
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+}
+
+/* El cliente va en neutro y el dueño en el acento: el que lee es el dueño. */
+.cliente {
+  background: var(--papel-quemado);
+  color: var(--grafito);
+}
+
+.negocio {
+  background: var(--pinche-lavado);
+  color: var(--pinche);
+}
+
+.titulo {
+  margin-top: var(--s-3);
+  font-family: var(--f-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: var(--lh-snug);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.texto {
+  margin-top: var(--s-2);
+  color: var(--grafito);
+  font-size: var(--t-sm);
+  text-wrap: pretty;
+}
+
+/* --- Remate ------------------------------------------------------------- */
+
+.remate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-3) var(--s-6);
+  margin-top: var(--s-6);
+  padding: var(--s-5) var(--s-6);
+
+  background: var(--pagado-lavado);
+  border-radius: var(--r-grande);
+}
+
+.remateTitulo {
+  font-family: var(--f-display);
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tr-display);
+  text-transform: uppercase;
+  color: var(--pagado);
+  text-wrap: balance;
+}
+
+.remateTexto {
+  flex: 1;
+  /* min() y no 18rem a secas: en pantallas de 320px el mínimo fijo era más
+     ancho que el hueco disponible y empujaba el scroll horizontal de la página
+     entera. */
+  min-width: min(18rem, 100%);
+  color: var(--grafito);
+  text-wrap: pretty;
+}

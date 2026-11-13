@@ -1,0 +1,74 @@
+.aviso {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-6);
+  padding: var(--s-3) var(--s-4);
+
+  border: var(--hair) dashed var(--pinche);
+  border-radius: var(--r-chico);
+  background: color-mix(in srgb, var(--pinche) 6%, transparent);
+
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  line-height: 1.6;
+  color: var(--grafito);
+}
+
+.aviso strong {
+  color: var(--pinche);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+}
+
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: var(--s-5);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  padding: var(--s-6) var(--s-5);
+
+  background: var(--papel-alto);
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-chico);
+}
+
+.cita {
+  flex: 1;
+  font-size: var(--t-lg);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+/* La comilla de apertura, en el rojo del sistema. */
+.cita::before {
+  content: '“';
+  color: var(--pinche);
+  font-family: var(--f-display);
+  font-size: 2em;
+  line-height: 0;
+  vertical-align: -0.25em;
+  margin-inline-end: 2px;
+}
+
+.firma {
+  padding-top: var(--s-4);
+  border-top: var(--hair) dashed var(--papel-borde);
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  line-height: 1.7;
+  color: var(--grafito);
+}
+
+.nombre {
+  display: block;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--tinta);
+}

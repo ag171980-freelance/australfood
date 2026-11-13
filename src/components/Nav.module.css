@@ -1,0 +1,187 @@
+.nav {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+
+  /* Arranca transparente sobre la foto del hero. El estado .pegada, que
+     dispara el observer del centinela, lo devuelve a papel. */
+  background: transparent;
+  border-bottom: var(--hair) solid transparent;
+  color: var(--papel-alto);
+
+  transition:
+    border-color var(--d-medio) var(--e-papel),
+    background-color var(--d-medio) var(--e-papel),
+    color var(--d-medio) var(--e-papel);
+}
+
+.pegada {
+  border-bottom-color: var(--papel-borde);
+  background: color-mix(in srgb, var(--papel) 94%, transparent);
+  backdrop-filter: blur(10px);
+  color: var(--tinta);
+}
+
+.interior {
+  width: min(100% - var(--gutter) * 2, var(--ancho-max));
+  margin-inline: auto;
+  height: 4.5rem;
+
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+}
+
+/* --- Marca -------------------------------------------------------------- */
+
+.marca {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+
+  font-family: var(--f-display);
+  font-size: 1.9rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* El punto rojo del pinche, alineado con la línea de base del logotipo. */
+.marca::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pinche);
+  transform: translateY(-1px);
+}
+
+/* --- Enlaces ------------------------------------------------------------ */
+
+.enlaces {
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+  margin-inline-start: auto;
+}
+
+.enlace {
+  position: relative;
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.72;
+  padding-block: var(--s-2);
+  transition: opacity var(--d-rapido) var(--e-papel);
+}
+
+.enlace:hover {
+  opacity: 1;
+}
+
+/* Subrayado que avanza como el papel que sale del rodillo. */
+.enlace::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--pinche);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--d-medio) var(--e-papel);
+}
+
+.enlace:hover::after {
+  transform: scaleX(1);
+}
+
+.accion {
+  margin-inline-start: var(--s-2);
+}
+
+/* --- Botón de menú móvil ------------------------------------------------- */
+
+.hamburguesa {
+  display: none;
+  margin-inline-start: auto;
+  padding: var(--s-3);
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+}
+
+@media (max-width: 880px) {
+  .hamburguesa {
+    display: block;
+  }
+
+  .enlaces {
+    position: fixed;
+    inset: 4.5rem 0 auto 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    margin: 0;
+    padding: var(--s-4) var(--gutter) var(--s-6);
+
+    background: var(--papel);
+    /* El panel es de papel, así que fija su color: si heredara el claro del
+       nav transparente, los enlaces quedarían invisibles sobre él. */
+    color: var(--tinta);
+    border-bottom: var(--hair) solid var(--papel-borde);
+    border-end-start-radius: var(--r-grande);
+    border-end-end-radius: var(--r-grande);
+    box-shadow: var(--sombra-levantada);
+
+    /* Se despliega como el papel que baja del rollo. */
+    transform-origin: top;
+    transform: scaleY(0);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      transform var(--d-medio) var(--e-papel),
+      opacity var(--d-rapido) var(--e-papel),
+      visibility 0s linear var(--d-medio);
+  }
+
+  .abierto {
+    transform: scaleY(1);
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .enlace {
+    padding-block: var(--s-4);
+    border-bottom: var(--hair) solid var(--papel-borde);
+    font-size: var(--t-sm);
+    opacity: 1;
+  }
+
+  .enlace::after {
+    display: none;
+  }
+
+  .accion {
+    margin: var(--s-5) 0 0;
+  }
+}
+
+/* Centinela del estado "pegada". Sustituye al listener de scroll: cuando
+   este bloque sale del viewport, el observer marca el nav. */
+.centinela {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 24px;
+  pointer-events: none;
+}

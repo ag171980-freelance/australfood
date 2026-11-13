@@ -1,0 +1,161 @@
+.planes {
+  display: grid;
+  /* El minmax va envuelto en min(): a 320px la pista de 19rem era más ancha
+     que la columna y las tarjetas se salían de la pantalla. */
+  grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr));
+  gap: var(--s-6);
+  align-items: start;
+  /* Tres columnas de 19rem más dos gaps de 2rem necesitan 61rem: con los
+     56rem de antes la tercera tarjeta caía sola a una fila nueva. */
+  max-width: 66rem;
+  margin-inline: auto;
+}
+
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  padding: var(--s-7) var(--s-6);
+
+  background: var(--papel-alto);
+  border: 1.5px solid var(--papel-borde);
+  border-radius: var(--r-chico);
+}
+
+/* El plan anual sube un escalón y se pincha al riel: es el que queremos
+   que se elija, y el sistema ya tiene una forma para "esto está elegido". */
+.recomendado {
+  border-color: var(--tinta);
+  box-shadow: var(--sombra-levantada);
+}
+
+.pinche {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  translate: -50% 0;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--pinche);
+  box-shadow:
+    inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+    0 4px 8px rgba(22, 19, 15, 0.35);
+}
+
+.nombre {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+/* --- Precio --------------------------------------------------------------- */
+
+.precio {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.importe {
+  font-family: var(--f-display);
+  font-size: clamp(3rem, 2rem + 4vw, 4.5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: var(--tr-display);
+  font-variant-numeric: tabular-nums;
+}
+
+.periodo {
+  font-family: var(--f-mono);
+  font-size: var(--t-sm);
+  letter-spacing: 0.04em;
+  color: var(--grafito);
+}
+
+/* El precio de lista tachado: la línea es roja, como una corrección hecha
+   a mano sobre la carta. */
+.tachado {
+  position: relative;
+  font-family: var(--f-mono);
+  font-size: var(--t-lg);
+  color: var(--grafito);
+  font-variant-numeric: tabular-nums;
+}
+
+.tachado::after {
+  content: '';
+  position: absolute;
+  inset-inline: -3px;
+  top: 52%;
+  height: 2px;
+  background: var(--pinche);
+  rotate: -4deg;
+}
+
+.equivalencia {
+  font-family: var(--f-mono);
+  font-size: var(--t-sm);
+  color: var(--grafito);
+}
+
+.equivalencia strong {
+  color: var(--tinta);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Ahorro --------------------------------------------------------------- */
+
+/* Bloque, no flex: es una oración sola. En flex cada tramo de texto suelto
+   se vuelve un ítem anónimo, así que el gap abría un hueco antes de los dos
+   puntos y la cola quedaba sangrada al envolver en pantallas chicas. */
+.ahorro {
+  padding: var(--s-3) var(--s-4);
+  line-height: var(--lh-body);
+
+  background: color-mix(in srgb, var(--pagado) 12%, transparent);
+  border-inline-start: 3px solid var(--pagado);
+  border-radius: var(--r-chico);
+
+  font-family: var(--f-mono);
+  font-size: var(--t-sm);
+  color: var(--tinta);
+}
+
+.ahorro strong {
+  font-weight: 600;
+  color: var(--pagado);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Detalle -------------------------------------------------------------- */
+
+.detalle {
+  display: grid;
+  gap: var(--s-3);
+  padding-top: var(--s-5);
+  border-top: var(--hair) dashed var(--papel-borde);
+  font-size: var(--t-sm);
+  color: var(--grafito);
+}
+
+.detalle li {
+  display: flex;
+  gap: var(--s-3);
+}
+
+.detalle li::before {
+  content: '✓';
+  flex: none;
+  color: var(--pagado);
+  font-weight: 600;
+}
+
+.pieDePlan {
+  margin-top: auto;
+}

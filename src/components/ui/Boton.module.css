@@ -1,0 +1,89 @@
+.boton {
+  --b-fondo: var(--pinche);
+  --b-texto: var(--papel-alto);
+  --b-borde: var(--pinche);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+
+  padding: 0.9rem 1.7rem;
+  border: var(--hair) solid var(--b-borde);
+  border-radius: var(--r-pill);
+
+  background: var(--b-fondo);
+  color: var(--b-texto);
+
+  font-family: var(--f-mono);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+
+  box-shadow: var(--sombra-papel);
+
+  transition:
+    transform var(--d-rapido) var(--e-suave),
+    box-shadow var(--d-medio) var(--e-suave),
+    background-color var(--d-rapido) var(--e-papel),
+    border-color var(--d-rapido) var(--e-papel);
+}
+
+/* Se levanta al pasar por encima y se hunde al apretar: tiene peso. */
+.boton:hover {
+  --b-fondo: var(--pinche-hover);
+  --b-borde: var(--pinche-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-levantada);
+}
+
+.boton:active {
+  transform: translateY(1px);
+  box-shadow: var(--sombra-papel);
+}
+
+.boton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- Variantes ---------------------------------------------------------- */
+
+.secundario {
+  --b-fondo: transparent;
+  --b-texto: var(--tinta);
+  --b-borde: var(--tinta);
+}
+
+.secundario:hover {
+  --b-fondo: var(--tinta);
+  --b-texto: var(--papel-alto);
+  --b-borde: var(--tinta);
+}
+
+.fantasma {
+  --b-fondo: transparent;
+  --b-texto: var(--papel);
+  --b-borde: var(--tinta-borde);
+}
+
+.fantasma:hover {
+  --b-fondo: var(--papel);
+  --b-texto: var(--tinta);
+  --b-borde: var(--papel);
+}
+
+/* --- Tamaños ------------------------------------------------------------ */
+
+.grande {
+  padding: 1.1rem 2.2rem;
+  font-size: var(--t-base);
+}
+
+.bloque {
+  width: 100%;
+}

@@ -1,0 +1,46 @@
+/* =========================================================================
+   Invitación al demo. La sección no muestra producto: sólo tiene que hacer
+   evidente dónde se toca. Todo el peso visual está puesto en un solo botón.
+   ========================================================================= */
+
+.invitacion {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-5);
+
+  padding-block: clamp(var(--s-5), 4vw, var(--s-7));
+}
+
+/* Un resplandor cálido detrás del botón, del mismo rojo de la marca: separa
+   el llamado del fondo tinta sin agregarle un recuadro más a la página. */
+.invitacion::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  width: min(34rem, 100%);
+  height: 16rem;
+  transform: translate(-50%, -60%);
+
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--pinche) 34%, transparent),
+    transparent 68%
+  );
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.cta {
+  position: relative;
+  padding: 1.3rem 2.9rem;
+  font-size: var(--t-lg);
+  letter-spacing: 0.08em;
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--pinche) 45%, transparent);
+}
+
+.cta:hover {
+  box-shadow: 0 18px 40px color-mix(in srgb, var(--pinche) 55%, transparent);
+}

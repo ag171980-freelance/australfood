@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "hero-milanesa",
+    "archivo": "hero-milanesa.jpg",
+    "termino": "milanesa napolitana argentina",
+    "titulo": "File:Milanesa napolitana argentina.jpg",
+    "licencia": "CC BY 3.0",
+    "autor": "Horacio Cambeiro",
+    "origen": "https://commons.wikimedia.org/wiki/File%3AMilanesa%20napolitana%20argentina.jpg"
+  },
+  {
+    "slug": "plato-milanesa",
+    "archivo": "plato-milanesa.jpg",
+    "termino": "milanesa napolitana con papas fritas",
+    "titulo": "File:Milanesa napolitana con papas fritas rodajas de tomate y orégano.jpg",
+    "licencia": "CC BY 2.0",
+    "autor": "www.flickr.com/photos/viajescangrejo/",
+    "origen": "https://commons.wikimedia.org/wiki/File%3AMilanesa%20napolitana%20con%20papas%20fritas%20rodajas%20de%20tomate%20y%20or%C3%A9gano.jpg"
+  },
+  {
+    "slug": "plato-parrilla",
+    "archivo": "plato-parrilla.jpg",
+    "termino": "bife de chorizo parrilla",
+    "titulo": "File:Bife de chorizo a punto 02.jpg",
+    "licencia": "CC BY-SA 4.0",
+    "autor": "Patricio Calvo",
+    "origen": "https://commons.wikimedia.org/wiki/File%3ABife%20de%20chorizo%20a%20punto%2002.jpg"
+  },
+  {
+    "slug": "plato-pastas",
+    "archivo": "plato-pastas.jpg",
+    "termino": "ñoquis salsa tomate plato",
+    "titulo": "File:Plato de ñoquis argentinos con salsa de carne y tomate con queso rallado.jpg",
+    "licencia": "CC BY-SA 4.0",
+    "autor": "Horacio Cambeiro",
+    "origen": "https://commons.wikimedia.org/wiki/File%3APlato%20de%20%C3%B1oquis%20argentinos%20con%20salsa%20de%20carne%20y%20tomate%20con%20queso%20rallado.jpg"
+  },
+  {
+    "slug": "plato-empanadas",
+    "archivo": "plato-empanadas.jpg",
+    "termino": "empanadas argentinas carne",
+    "titulo": "File:Primer plano de empanadas fritas de carne.jpg",
+    "licencia": "CC BY-SA 3.0",
+    "autor": "Horacio Cambeiro",
+    "origen": "https://commons.wikimedia.org/wiki/File%3APrimer%20plano%20de%20empanadas%20fritas%20de%20carne.jpg"
+  },
+  {
+    "slug": "plato-provoleta",
+    "archivo": "plato-provoleta.jpg",
+    "termino": "provoleta",
+    "titulo": "File:Provoleta argentina (cheese).jpg",
+    "licencia": "CC BY-SA 4.0",
+    "autor": "Horacio Cambeiro",
+    "origen": "https://commons.wikimedia.org/wiki/File%3AProvoleta%20argentina%20(cheese).jpg"
+  },
+  {
+    "slug": "plato-flan",
+    "archivo": "plato-flan.jpg",
+    "termino": "flan con dulce de leche",
+    "titulo": "File:Flan con dulce de leche 2.jpg",
+    "licencia": "CC BY 2.0",
+    "autor": "Beatrice Murch",
+    "origen": "https://commons.wikimedia.org/wiki/File%3AFlan%20con%20dulce%20de%20leche%202.jpg"
+  },
+  {
+    "slug": "ambiente-cocina",
+    "archivo": "ambiente-cocina.jpg",
+    "termino": "chef cooking restaurant kitchen",
+    "titulo": "File:Chefs at work (8150562599).jpg",
+    "licencia": "CC BY 2.0",
+    "autor": "Paul Keller",
+    "origen": "https://commons.wikimedia.org/wiki/File%3AChefs%20at%20work%20(8150562599).jpg"
+  }
+]

@@ -1,0 +1,198 @@
+/* El papel de la comanda. Chrome compartido entre el hero y la demo:
+   cabecera, reglas punteadas, y el borde inferior arrancado. */
+
+.ticket {
+  position: relative;
+  background: var(--papel-alto);
+  box-shadow: var(--sombra-levantada);
+  padding: var(--s-6) var(--s-5) var(--s-7);
+  font-family: var(--f-mono);
+  font-size: var(--t-sm);
+  line-height: 1.55;
+  color: var(--tinta);
+}
+
+/* Sombreado lateral: el papel no es plano, se curva contra el rodillo. */
+.ticket::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(22, 19, 15, 0.07) 0%,
+    transparent 7%,
+    transparent 93%,
+    rgba(22, 19, 15, 0.07) 100%
+  );
+}
+
+/* El corte de sierra de abajo. */
+.ticket::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: -9px;
+  height: 9px;
+  background:
+    linear-gradient(-45deg, transparent 50%, var(--papel-alto) 50%),
+    linear-gradient(45deg, transparent 50%, var(--papel-alto) 50%);
+  background-size: 18px 18px;
+  background-repeat: repeat-x;
+}
+
+/* Perforación del pinche, arriba y al centro. */
+.colgado {
+  padding-top: var(--s-8);
+}
+
+.colgado .agujero {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  translate: -50% 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--papel);
+  box-shadow: inset 0 2px 3px rgba(22, 19, 15, 0.45);
+}
+
+/* --- Partes ------------------------------------------------------------- */
+
+.cabecera {
+  text-align: center;
+  padding-bottom: var(--s-4);
+}
+
+.local {
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.meta {
+  margin-top: var(--s-2);
+  font-size: var(--t-xs);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+.regla {
+  border: 0;
+  border-top: 1px dashed var(--papel-borde);
+  margin-block: var(--s-3);
+}
+
+.reglaSolida {
+  border: 0;
+  border-top: 1.5px solid var(--tinta);
+  margin-block: var(--s-3);
+}
+
+/* Fila de ítem: nombre a la izquierda, importe alineado a la derecha
+   con cifras tabulares para que la columna quede a plomo. */
+.fila {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+}
+
+.filaNombre {
+  flex: 1;
+  min-width: 0;
+}
+
+.filaImporte {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+
+  font-family: var(--f-display);
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.total span:last-child {
+  font-variant-numeric: tabular-nums;
+}
+
+.pie {
+  margin-top: var(--s-4);
+  text-align: center;
+  font-size: var(--t-xs);
+  letter-spacing: 0.06em;
+  color: var(--grafito);
+}
+
+/* --- Animación de impresión --------------------------------------------- */
+
+/* Cada línea baja un poco y se revela, como el papel que avanza un paso. */
+.linea {
+  animation: avanzar var(--d-medio) var(--e-papel) both;
+}
+
+@keyframes avanzar {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+    filter: blur(1px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* --- Sello -------------------------------------------------------------- */
+
+.sello {
+  position: absolute;
+  top: 22%;
+  right: 4%;
+  rotate: -14deg;
+
+  padding: var(--s-2) var(--s-4);
+  border: 3px solid var(--pagado);
+  border-radius: var(--r-chico);
+
+  color: var(--pagado);
+  font-family: var(--f-display);
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+
+  opacity: 0.88;
+  animation: sellar 420ms var(--e-golpe) both;
+}
+
+/* El sello cae de golpe, como se apoya un sello de goma de verdad. */
+@keyframes sellar {
+  from {
+    opacity: 0;
+    scale: 2.4;
+    rotate: -30deg;
+  }
+  to {
+    opacity: 0.88;
+    scale: 1;
+    rotate: -14deg;
+  }
+}

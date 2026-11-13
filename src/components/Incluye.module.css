@@ -1,0 +1,78 @@
+/* Cinco prestaciones, cinco celdas. La grilla varía de tamaño para tener
+   ritmo: dos anchas arriba y tres medianas abajo, que son las seis columnas
+   justas en las dos filas. */
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--s-4);
+}
+
+/* Sin foto, la celda es el cuerpo: lleva ella el padding y centra su propio
+   texto. Antes había un div interior que hacía las dos cosas porque la imagen
+   tenía que ir a sangre contra el borde redondeado, y por eso la celda
+   recortaba con overflow. Ya no hay nada que recortar. */
+.celda {
+  grid-column: span var(--span, 2);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--s-5);
+
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-grande);
+  background: var(--papel-alto);
+
+  transition:
+    transform var(--d-medio) var(--e-suave),
+    box-shadow var(--d-medio) var(--e-suave);
+}
+
+.celda:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-levantada);
+}
+
+.titulo {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: var(--lh-snug);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.texto {
+  margin-top: var(--s-3);
+  color: var(--grafito);
+  font-size: var(--t-sm);
+  text-wrap: pretty;
+}
+
+/* --- Responsive --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .celda {
+    grid-column: span 1;
+  }
+  /* Son cinco celdas: en dos columnas la quinta quedaba sola con un hueco al
+     lado. Va a lo ancho y la sección baja en dos pares y una banda, que es
+     ritmo y no un agujero. */
+  .celda:nth-child(5) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .bento {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .celda,
+  .celda:nth-child(5) {
+    grid-column: span 1;
+  }
+}

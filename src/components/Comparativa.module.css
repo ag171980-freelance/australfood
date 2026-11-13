@@ -1,0 +1,110 @@
+/* Qué se cobra, sin comparar contra números de terceros que no podemos
+   verificar. El 0% de comisión y, debajo, la suscripción fija. */
+
+.etapas {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-4);
+}
+
+.etapa {
+  display: flex;
+  flex-direction: column;
+  padding: var(--s-6);
+  border-radius: var(--r-grande);
+  background: var(--papel-alto);
+}
+
+/* La comisión en cero va en el verde de confirmación, el mismo del sello
+   PAGADO: es la única familia de la paleta que marca algo a favor. */
+.gratis {
+  /* Mezcla clara, no el lavado directo: sobre papel quemado el lavado dejaba
+     la etiqueta chica en 3,3:1 y el mínimo para ese tamaño es 4,5:1. */
+  background: color-mix(in srgb, var(--pagado) 10%, var(--papel-alto));
+}
+
+.tramo {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+.tasa {
+  margin-top: var(--s-3);
+  font-family: var(--f-display);
+  font-size: clamp(3.5rem, 2rem + 5vw, 6rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: var(--tr-display);
+  font-variant-numeric: tabular-nums;
+  color: var(--tinta);
+}
+
+.gratis .tasa {
+  color: var(--pagado);
+}
+
+.detalle {
+  margin-top: var(--s-4);
+  max-width: 26rem;
+  color: var(--grafito);
+  text-wrap: pretty;
+}
+
+/* --- La constante ------------------------------------------------------- */
+
+.constante {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--s-3) var(--s-5);
+
+  margin-top: var(--s-4);
+  padding: var(--s-5) var(--s-6);
+  border-radius: var(--r-grande);
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.constanteEtiqueta {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--humo);
+}
+
+.constanteMonto {
+  font-family: var(--f-display);
+  font-size: clamp(2rem, 1.2rem + 2.4vw, 3rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: var(--tr-display);
+  font-variant-numeric: tabular-nums;
+  color: var(--papel-alto);
+  white-space: nowrap;
+}
+
+.constanteDetalle {
+  min-width: 16rem;
+  color: var(--humo);
+  font-size: var(--t-sm);
+  text-wrap: pretty;
+}
+
+/* --- Responsive --------------------------------------------------------- */
+
+@media (max-width: 780px) {
+  .constante {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-2);
+  }
+
+  .constanteDetalle {
+    min-width: 0;
+  }
+}

@@ -1,0 +1,83 @@
+.lista {
+  max-width: 52rem;
+  border-top: var(--hair) solid var(--papel-borde);
+}
+
+.item {
+  border-bottom: var(--hair) solid var(--papel-borde);
+}
+
+.pregunta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+
+  padding-block: var(--s-5);
+  cursor: pointer;
+  list-style: none;
+
+  font-family: var(--f-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: var(--lh-snug);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+
+  transition: color var(--d-rapido) var(--e-papel);
+}
+
+.pregunta::-webkit-details-marker {
+  display: none;
+}
+
+.pregunta:hover {
+  color: var(--pinche);
+}
+
+/* El signo es una cruz que gira a menos: mecánico, sin rebote. */
+.signo {
+  flex: none;
+  position: relative;
+  width: 14px;
+  height: 14px;
+  margin-inline-start: auto;
+  translate: 0 -2px;
+}
+
+.signo::before,
+.signo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: var(--pinche);
+}
+
+.signo::before {
+  width: 100%;
+  height: 2px;
+}
+
+.signo::after {
+  width: 2px;
+  height: 100%;
+  transition: transform var(--d-medio) var(--e-papel);
+}
+
+.item[open] .signo::after {
+  transform: scaleY(0);
+}
+
+.respuesta {
+  padding-bottom: var(--s-6);
+  max-width: var(--ancho-texto);
+  color: var(--grafito);
+}
+
+.respuesta a {
+  color: var(--tinta);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--pinche);
+  text-decoration-thickness: 2px;
+}

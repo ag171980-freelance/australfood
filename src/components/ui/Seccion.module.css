@@ -1,0 +1,93 @@
+.seccion {
+  position: relative;
+  padding-block: var(--seccion-y);
+}
+
+.papel {
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+/* Las secciones que no son papel son losas apoyadas sobre la página: se
+   recortan con esquinas blandas, no con el borde de sierra que tenían
+   antes. El fondo del body es papel, así que las esquinas lo dejan ver. */
+.quemado,
+.tinta {
+  border-radius: var(--r-xl);
+}
+
+.quemado {
+  background: var(--papel-quemado);
+  color: var(--tinta);
+}
+
+.tinta {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.interior {
+  width: min(100% - var(--gutter) * 2, var(--ancho-max));
+  margin-inline: auto;
+}
+
+/* --- Encabezado --------------------------------------------------------- */
+
+.encabezado {
+  max-width: 46rem;
+  margin-bottom: var(--s-8);
+}
+
+.centrado {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+
+  margin-bottom: var(--s-5);
+
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+.tinta .eyebrow {
+  color: var(--humo);
+}
+
+.centrado .eyebrow {
+  justify-content: center;
+}
+
+.titulo {
+  font-family: var(--f-display);
+  font-size: var(--t-3xl);
+  font-weight: 800;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-display);
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.bajada {
+  max-width: var(--ancho-texto);
+  margin-top: var(--s-5);
+  font-size: var(--t-lg);
+  color: var(--grafito);
+  text-wrap: pretty;
+}
+
+.tinta .bajada {
+  color: var(--humo);
+}
+
+.centrado .bajada {
+  margin-inline: auto;
+}

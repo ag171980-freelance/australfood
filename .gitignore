@@ -1,0 +1,27 @@
+# Dependencias
+node_modules/
+
+# Salida del build
+dist/
+dist-ssr/
+
+# Caché incremental de TypeScript
+*.tsbuildinfo
+
+# Entorno local
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editores y sistema operativo
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

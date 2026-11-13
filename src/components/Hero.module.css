@@ -1,0 +1,369 @@
+/* Hero inmersivo: la foto ocupa todo el bloque y el contenido va encima.
+   El velo es direccional, no un oscurecido parejo: tapa donde hay texto y
+   deja limpia la comida, que es lo que tiene que dar hambre. */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+
+  /* Alto contenido: llena la pantalla pero con techo, para que en monitores
+     grandes no se estire y el CTA quede siempre a la vista. */
+  min-height: clamp(38rem, 92svh, 54rem);
+  padding-block: calc(4.5rem + var(--s-7)) var(--s-8);
+
+  background: var(--tinta);
+  overflow: hidden;
+}
+
+.fondo,
+.fondo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fondo img {
+  object-fit: cover;
+  object-position: 62% 50%;
+}
+
+.velo {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Franja superior: los enlaces del nav caen sobre la zona clara de la
+       foto, donde el velo lateral casi no tapa. Sin esto la legibilidad
+       depende del recorte, que cambia con el ancho. */
+    linear-gradient(to bottom, rgba(22, 19, 15, 0.8) 0%, transparent 16%),
+    linear-gradient(
+      100deg,
+      rgba(22, 19, 15, 0.95) 0%,
+      rgba(22, 19, 15, 0.88) 30%,
+      rgba(22, 19, 15, 0.55) 55%,
+      rgba(22, 19, 15, 0.18) 78%,
+      rgba(22, 19, 15, 0.35) 100%
+    ),
+    /* Segunda pasada abajo: asienta la foto contra el borde de la sección. */
+    /* Fundido inferior al color exacto de la sección siguiente: el hero y
+       el bloque del problema se leen como una sola apertura oscura. */
+    linear-gradient(to top, rgb(22, 19, 15) 0%, rgba(22, 19, 15, 0.4) 18%, transparent 42%);
+  pointer-events: none;
+}
+
+.interior {
+  position: relative;
+  z-index: 1;
+  width: min(100% - var(--gutter) * 2, var(--ancho-max));
+  margin-inline: auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: var(--s-8);
+  align-items: center;
+}
+
+/* --- Texto -------------------------------------------------------------- */
+
+.titulo {
+  font-family: var(--f-display);
+  /* Medido, no estimado: el renglón más largo ("nosotros simplificamos") mide
+     9,7 veces el font-size. La columna del texto es ~0,45 del viewport mientras
+     el hero va a dos columnas, así que el tope seguro es 4,4vw. El techo de
+     3.5rem lo alcanza recién a los 1270px, donde la columna llega a 586px y el
+     renglón ocupa 545. Sin el término en vw, a 1024px el titular se partía en
+     cuatro renglones aunque en 1340 entrara en tres. */
+  font-size: clamp(2.6rem, 4.4vw, 3.5rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: var(--tr-display);
+  color: var(--papel-alto);
+}
+
+/* Cada frase es un renglón. Sin esto el corte lo elige el navegador según el
+   ancho y las tres frases se pisan entre líneas. */
+.linea {
+  display: block;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.titulo em {
+  font-style: normal;
+  color: var(--pinche);
+}
+
+/* 34rem y no 30rem: la bajada creció a tres oraciones y con la medida anterior
+   caía en cinco renglones, que es más alto que el propio titular. */
+.bajada {
+  max-width: 34rem;
+  margin-top: var(--s-5);
+  font-size: var(--t-lg);
+  color: rgba(247, 244, 238, 0.78);
+  text-wrap: pretty;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  margin-top: var(--s-7);
+}
+
+.garantias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-6);
+}
+
+/* Pastillas de vidrio sobre la foto, no fichas de papel. */
+.garantia {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+
+  padding: var(--s-2) var(--s-3);
+  border: var(--hair) solid rgba(247, 244, 238, 0.22);
+  border-radius: var(--r-pill);
+  background: rgba(247, 244, 238, 0.08);
+  backdrop-filter: blur(6px);
+
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  color: rgba(247, 244, 238, 0.82);
+}
+
+.garantia::before {
+  content: '✓';
+  color: var(--pagado-claro); /* el --pagado no contrasta sobre tinta */
+  font-weight: 700;
+}
+
+/* --- Pruebas del producto ----------------------------------------------- */
+
+.pruebas {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 25rem);
+  padding-top: var(--s-8);
+  /* Deja sitio abajo para el aviso: si se superpone, tapa el botón Pagar. */
+  padding-bottom: 5.5rem;
+}
+
+.telefono {
+  width: min(100%, 19rem);
+  padding: var(--s-4);
+  border: var(--hair) solid rgba(247, 244, 238, 0.18);
+  border-radius: var(--r-grande);
+  background: var(--papel-alto);
+  color: var(--tinta);
+  box-shadow: var(--sombra-flotante);
+  rotate: -1.5deg;
+}
+
+.telefonoCabecera {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: var(--s-3);
+  border-bottom: var(--hair) solid var(--papel-borde);
+}
+
+.telefonoLocal {
+  font-family: var(--f-display);
+  font-size: var(--t-lg);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: var(--tr-display);
+}
+
+.telefonoZona {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  color: var(--grafito);
+}
+
+.vitrina {
+  display: grid;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr auto;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.itemFoto {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--r-chico);
+  object-fit: cover;
+}
+
+.itemNombre {
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+
+.itemPrecio {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  color: var(--grafito);
+  white-space: nowrap;
+}
+
+.telefonoPie {
+  margin-top: var(--s-4);
+  padding: var(--s-3);
+  border-radius: var(--r-pill);
+  background: var(--pinche);
+  color: var(--papel-alto);
+
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* El aviso cierra el circuito: lo que le llega al dueño. */
+.aviso {
+  position: absolute;
+  right: -1rem;
+  bottom: 0;
+  z-index: 1;
+
+  display: grid;
+  gap: 2px;
+  padding: var(--s-4) var(--s-5);
+  border-radius: var(--r-grande) var(--r-grande) var(--r-grande) var(--r-xs);
+  background: var(--papel-alto);
+  color: var(--tinta);
+  box-shadow: var(--sombra-flotante);
+  rotate: 2deg;
+}
+
+.avisoOrigen {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--pagado);
+}
+
+.avisoTexto {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.avisoMonto {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* --- Entrada ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .texto > *,
+  .telefono,
+  .aviso {
+    animation: entrar var(--d-lento) var(--e-suave) backwards;
+  }
+  .texto > *:nth-child(1) { animation-delay: 80ms; }
+  .texto > *:nth-child(2) { animation-delay: 180ms; }
+  .texto > *:nth-child(3) { animation-delay: 260ms; }
+  .texto > *:nth-child(4) { animation-delay: 340ms; }
+  .telefono { animation-delay: 400ms; }
+  .aviso { animation-delay: 520ms; }
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* --- Responsive --------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+  .hero {
+    min-height: 0;
+    padding-block: calc(4.5rem + var(--s-7)) var(--s-9);
+  }
+
+  .interior {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-8);
+  }
+
+  /* En una columna el titular tiene todo el ancho, así que la atadura de 4,4vw
+     de arriba lo dejaría innecesariamente chico. Acá el límite lo pone la
+     pantalla, no la columna. */
+  .titulo {
+    font-size: clamp(2.1rem, 1rem + 3.6vw, 3.4rem);
+  }
+
+  /* En una columna el velo tiene que tapar de arriba abajo, no de lado. */
+  .velo {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(22, 19, 15, 0.94) 0%,
+        rgba(22, 19, 15, 0.86) 45%,
+        rgba(22, 19, 15, 0.6) 100%
+      );
+  }
+
+  .pruebas {
+    justify-self: start;
+    width: 100%;
+    max-width: 24rem;
+    padding-top: var(--s-6);
+    padding-right: 0;
+  }
+
+  .aviso {
+    right: auto;
+    left: 9rem;
+    bottom: -1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .telefono,
+  .aviso {
+    rotate: none;
+  }
+
+  /* El aviso vuelve al flujo, así que el hueco reservado abajo sobra. */
+  .pruebas {
+    padding-top: var(--s-4);
+    padding-bottom: 0;
+  }
+
+  .telefono {
+    width: 100%;
+  }
+
+  .aviso {
+    position: static;
+    margin-top: var(--s-4);
+    justify-self: start;
+  }
+
+  .avisoMonto {
+    font-size: 1.25rem;
+  }
+}
