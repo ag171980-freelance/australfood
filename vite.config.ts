@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // base: './' para que el build funcione servido desde cualquier subcarpeta de htdocs
-// (por ejemplo http://localhost/landing-claude/dist/) sin tocar rutas a mano.
+// (por ejemplo http://localhost/australfood-landing/dist/) sin tocar rutas a mano.
 export default defineConfig({
   plugins: [react()],
   base: './',
@@ -22,7 +22,7 @@ export default defineConfig({
 
          Si movés el proyecto dentro de htdocs, actualizá esta ruta. */
       '/api': {
-        target: 'http://127.0.0.1/landing-claude/public',
+        target: 'http://127.0.0.1/australfood-landing/public',
         changeOrigin: true,
       },
     },

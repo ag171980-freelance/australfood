@@ -86,8 +86,9 @@ versiona ni se copia al build.
 
 Vite no ejecuta PHP. `vite.config.ts` manda `/api` por proxy a Apache, así que para
 probar el formulario con `npm run dev` **tiene que estar levantado el Apache de
-XAMPP**. El proxy apunta a `http://127.0.0.1/landing-claude/public`: si movés la
-carpeta dentro de `htdocs`, actualizá esa ruta.
+XAMPP**. El proxy apunta a `http://127.0.0.1/australfood-landing/public`: esa ruta
+tiene que coincidir con el nombre real de la carpeta dentro de `htdocs`, así que si
+la renombrás o la movés, actualizá el `target` en `vite.config.ts`.
 
 Va `127.0.0.1` y no `localhost` a propósito. Node resuelve `localhost` a `::1`
 primero y Apache escucha en IPv4, así que con el nombre el proxy muere en

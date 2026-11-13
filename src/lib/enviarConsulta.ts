@@ -10,7 +10,7 @@ export type Consulta = {
 }
 
 /* Ruta relativa a propósito: el build usa base './', así que esto resuelve
-   igual servido desde la raíz del dominio o desde htdocs/landing-claude/dist/.
+   igual servido desde la raíz del dominio o desde htdocs/australfood-landing/dist/.
    En desarrollo el proxy de vite.config.ts lo manda a Apache, que es quien
    ejecuta PHP; el server de Vite por sí solo devolvería el archivo sin correr. */
 const ENDPOINT = 'api/contacto.php'
