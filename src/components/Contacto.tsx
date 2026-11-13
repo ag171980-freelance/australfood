@@ -243,15 +243,17 @@ export function Contacto({ plan, onCambiarPlan }: Props) {
             {estado === 'enviando' ? 'Enviando…' : 'Enviar consulta'}
           </Boton>
 
+          {/* Queda siempre en el DOM aunque no diga nada: es la región viva que
+              anuncia el error y el destino del foco cuando el envío falla. Si
+              se montara recién con el error, el lector de pantalla se lo
+              perdería y el focus() no tendría a quién ir. */}
           <p
             className={[css.aviso, estado === 'falla' && css.avisoFalla].filter(Boolean).join(' ')}
             role="status"
             tabIndex={-1}
             ref={resumen}
           >
-            {estado === 'falla'
-              ? fallo
-              : 'Te respondo por WhatsApp. No uso tus datos para nada más.'}
+            {fallo}
           </p>
         </div>
       </form>

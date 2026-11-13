@@ -128,7 +128,6 @@
 .pie {
   display: grid;
   justify-items: center;
-  gap: var(--s-4);
 
   margin-top: var(--s-3);
   padding-top: var(--s-6);
@@ -136,11 +135,19 @@
   text-align: center;
 }
 
+/* El aire entre el botón y el aviso lo pone el aviso y no un gap de la
+   grilla: así, cuando no hay nada que avisar, no queda un hueco colgando
+   abajo del botón. */
 .aviso {
+  margin-top: var(--s-4);
   max-width: 28rem;
   font-size: var(--t-sm);
   line-height: var(--lh-body);
   color: var(--grafito);
+}
+
+.aviso:empty {
+  margin-top: 0;
 }
 
 .aviso:focus {
