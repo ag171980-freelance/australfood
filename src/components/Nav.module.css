@@ -36,9 +36,7 @@
 /* --- Marca -------------------------------------------------------------- */
 
 .marca {
-  display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
+  display: inline-block;
 
   font-family: var(--f-display);
   font-size: 1.9rem;
@@ -48,14 +46,12 @@
   line-height: 1;
 }
 
-/* El punto rojo del pinche, alineado con la línea de base del logotipo. */
-.marca::after {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--pinche);
-  transform: translateY(-1px);
+/* El rojo del pinche ya no es un punto al costado: está adentro de la
+   palabra. 'FOOD' hereda el color del nav, que cambia de crema a tinta
+   cuando el nav se pega, así que el logotipo sigue leyéndose sobre la foto
+   del hero y sobre el papel. */
+.austral {
+  color: var(--pinche);
 }
 
 /* --- Enlaces ------------------------------------------------------------ */

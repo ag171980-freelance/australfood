@@ -83,9 +83,7 @@
 }
 
 .marca {
-  display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
+  display: inline-block;
 
   font-family: var(--f-display);
   font-size: 1.6rem;
@@ -96,12 +94,9 @@
   line-height: 1;
 }
 
-.marca::after {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--pinche);
+/* Igual que en el nav: el rojo vive adentro de la palabra. */
+.austral {
+  color: var(--pinche);
 }
 
 .enlacesPie {

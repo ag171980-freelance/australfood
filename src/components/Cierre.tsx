@@ -29,7 +29,9 @@ export function Cierre() {
       </div>
 
       <div className={css.pie}>
-        <p className={css.marca}>AustralFood</p>
+        <p className={css.marca}>
+          <span className={css.austral}>Austral</span>Food
+        </p>
 
         <nav className={css.enlacesPie} aria-label="Enlaces del pie">
           <a href="#como-funciona">Cómo funciona</a>

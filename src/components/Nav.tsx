@@ -39,7 +39,7 @@ export function Nav() {
       <nav className={[css.nav, pegada && css.pegada].filter(Boolean).join(' ')}>
         <div className={css.interior}>
           <a href="#inicio" className={css.marca}>
-            AustralFood
+            <span className={css.austral}>Austral</span>Food
           </a>
 
           <button
