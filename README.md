@@ -102,6 +102,9 @@ En el build no hay nada que configurar: `public/` se copia tal cual, así que
 ## Estructura
 
 ```
+index.html         · la landing
+demo/index.html    · el demo, que es la otra página del sitio
+
 src/
   data/
     menu.ts        · menú del local de demostración
@@ -115,10 +118,44 @@ src/
     ui/            · Boton, Seccion, Ticket (el papel de comanda)
     Nav · Hero · Problema · ComoFunciona · InvitacionDemo
     Incluye · Comparativa · Precios · Preguntas · Contacto · Cierre
+  demo/
+    DemoApp.tsx    · el tablero: los dos lados del mostrador
+    estado/pedido.ts· el circuito del pedido y las cuentas
+    cliente/       · carta, ficha, comanda, datos, pago, seguimiento
+    local/Panel.tsx· el panel donde entran los pedidos
+    tour/          · el recorrido guiado y sus pasos
   styles/
     tokens.css     · el sistema de diseño entero
     global.css     · reset y utilidades
 ```
+
+---
+
+## El demo
+
+Vive en `/demo/` y es una segunda página, no una ruta de la landing: son dos
+entradas del mismo build (`vite.config.ts` → `rollupOptions.input`). Así el
+visitante que entra a leer no se baja el demo, y en el servidor son dos
+carpetas, sin necesidad de reescribir rutas.
+
+Muestra **un pedido de punta a punta y de los dos lados**: a la izquierda el
+celular del cliente (carta, ficha del plato, comanda, datos, pago y
+seguimiento) y a la derecha el panel del local, donde el pedido entra ya
+cobrado y se empuja de estado. Lo que pasa de un lado aparece del otro.
+
+Dos cosas que conviene saber antes de tocarlo:
+
+- **No hay backend.** Todo vive en memoria: es una demostración, no el
+  producto. El pedido del visitante no se guarda ni se le cobra a nadie, y eso
+  se dice en pantalla. Cuando exista la API, lo que cambia es de dónde salen
+  los datos, no la forma que tienen (`src/demo/estado/pedido.ts`).
+- **La carta sale de `src/data/menu.ts`**, la misma que usa la landing. Los
+  precios del demo y los de la página no se pueden contradecir porque son el
+  mismo archivo.
+
+El recorrido guiado arranca solo la primera vez y se puede volver a ver desde
+la barra de arriba. Los pasos están en `src/demo/tour/pasos.ts`: cada uno dice
+qué señala y, si hace falta, deja el demo en la escena que explica.
 
 ---
 

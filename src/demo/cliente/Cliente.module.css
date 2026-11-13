@@ -1,0 +1,716 @@
+/* =========================================================================
+   Las pantallas del cliente, adentro del teléfono.
+
+   Todo acá vive sobre papel y en un ancho de celular, así que la escala es
+   más chica que la de la landing: los tamaños de la página harían dos
+   palabras por renglón.
+   ========================================================================= */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+.cuerpo {
+  display: grid;
+  gap: var(--s-4);
+  align-content: start;
+  padding: var(--s-4);
+}
+
+/* --- Cabecera del local ------------------------------------------------- */
+
+.cabecera {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-3);
+
+  padding: var(--s-4);
+  border-bottom: var(--hair) solid var(--papel-borde);
+  background: var(--papel-alto);
+}
+
+.local {
+  font-family: var(--f-display);
+  font-size: 1.375rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.zona {
+  margin-top: 2px;
+  font-size: 0.6875rem;
+  color: var(--grafito);
+}
+
+.abierto {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex: 0 0 auto;
+
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--pagado);
+}
+
+.abierto span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pagado);
+}
+
+/* --- Buscador y rubros -------------------------------------------------- */
+
+.buscador {
+  padding: var(--s-4) var(--s-4) 0;
+}
+
+.campo {
+  width: 100%;
+  padding: var(--s-3);
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-chico);
+  background: var(--papel-alto);
+  font-size: 0.875rem;
+}
+
+.campo::placeholder {
+  color: var(--grafito);
+}
+
+.chips {
+  display: flex;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: 0 0 auto;
+  padding: var(--s-2) var(--s-4);
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-pill);
+
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+  white-space: nowrap;
+}
+
+.chipActivo {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: var(--papel);
+}
+
+/* --- La carta ----------------------------------------------------------- */
+
+.lista {
+  flex: 1;
+  padding: 0 var(--s-4) var(--s-8);
+}
+
+.rubro + .rubro {
+  margin-top: var(--s-5);
+}
+
+.rubroTitulo {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  padding-block: var(--s-2);
+  background: var(--papel);
+
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+.plato {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr) max-content;
+  gap: var(--s-3);
+  align-items: center;
+
+  width: 100%;
+  padding-block: var(--s-3);
+  border-bottom: var(--hair) solid var(--papel-borde);
+  text-align: left;
+}
+
+.platoFoto {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: var(--r-chico);
+  object-fit: cover;
+  background: var(--papel-quemado);
+}
+
+/* Sin foto, la inicial del plato. Un cuadro vacío se lee como una imagen
+   que no cargó; una inicial se lee como que ese plato no tiene foto. */
+.platoInicial {
+  display: grid;
+  place-items: center;
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--papel-borde);
+}
+
+.platoTexto {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.platoNombre {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.2;
+}
+
+.platoEtiqueta {
+  margin-inline-start: var(--s-2);
+  font-family: var(--f-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--pagado);
+}
+
+.platoDescripcion {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--grafito);
+
+  /* Dos renglones: la descripción entera está en la ficha del plato. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.platoPrecio {
+  font-family: var(--f-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.vacio {
+  padding-block: var(--s-6);
+  font-size: 0.875rem;
+  color: var(--grafito);
+}
+
+/* --- Barra del pedido --------------------------------------------------- */
+
+.barra {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  padding: var(--s-3);
+  background: linear-gradient(to top, var(--papel) 70%, transparent);
+}
+
+.barraBoton {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-pill);
+  background: var(--pinche);
+  color: var(--papel-alto);
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: var(--sombra-flotante);
+}
+
+.barraCuenta {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+}
+
+.barraTotal {
+  margin-inline-start: auto;
+  font-family: var(--f-mono);
+}
+
+/* --- Ficha del plato ---------------------------------------------------- */
+
+.telon {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(22, 19, 15, 0.5);
+}
+
+.hoja {
+  width: 100%;
+  max-height: 92%;
+  overflow-y: auto;
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  background: var(--papel-alto);
+}
+
+.hojaFoto {
+  width: 100%;
+  height: 9rem;
+  object-fit: cover;
+}
+
+.hojaCuerpo {
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-4);
+}
+
+.hojaNombre {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.hojaDescripcion {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--grafito);
+}
+
+.hojaPrecio {
+  font-family: var(--f-mono);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.etiqueta {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+.hojaPie {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-2);
+}
+
+/* --- Contador ----------------------------------------------------------- */
+
+.contador {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex: 0 0 auto;
+  padding: 2px;
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-pill);
+}
+
+.contadorBoton {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--tinta);
+}
+
+.contadorBoton:disabled {
+  color: var(--papel-borde);
+  cursor: default;
+}
+
+.contadorNumero {
+  min-width: 1.25rem;
+  text-align: center;
+  font-family: var(--f-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* --- Botones ------------------------------------------------------------ */
+
+.principal {
+  width: 100%;
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-pill);
+  background: var(--pinche);
+  color: var(--papel-alto);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.principal:hover {
+  background: var(--pinche-hover);
+}
+
+.secundario {
+  width: 100%;
+  padding: var(--s-3) var(--s-4);
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-pill);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+.cerrar {
+  width: 100%;
+  padding-block: var(--s-2);
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+/* --- Cabecera de paso --------------------------------------------------- */
+
+.paso {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--s-3);
+
+  padding: var(--s-3) var(--s-4);
+  border-bottom: var(--hair) solid var(--papel-borde);
+  background: var(--papel-alto);
+}
+
+.pasoVolver {
+  justify-self: start;
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+.pasoTitulo {
+  font-family: var(--f-display);
+  font-size: 1.125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* --- Envío o retiro ----------------------------------------------------- */
+
+.modo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-2);
+}
+
+.modoBoton {
+  display: grid;
+  gap: 2px;
+  padding: var(--s-3);
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-chico);
+
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+.modoBoton span {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  color: var(--grafito);
+}
+
+.modoActivo {
+  border-color: var(--tinta);
+  background: var(--papel-alto);
+}
+
+/* --- Comanda ------------------------------------------------------------ */
+
+.ticket {
+  width: 100%;
+}
+
+.lineas {
+  display: grid;
+  gap: var(--s-3);
+  padding-block: var(--s-3);
+}
+
+.linea {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: var(--s-2);
+  align-items: center;
+}
+
+.lineaTexto {
+  min-width: 0;
+}
+
+.lineaNombre {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.lineaNota {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  color: var(--grafito);
+}
+
+.lineaImporte {
+  font-family: var(--f-mono);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.cuentas {
+  display: grid;
+  gap: var(--s-2);
+  padding-block: var(--s-3);
+  border-top: var(--hair) dashed var(--papel-borde);
+}
+
+.cuentas p {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  color: var(--grafito);
+}
+
+/* --- Datos y pago ------------------------------------------------------- */
+
+.campoBloque {
+  display: grid;
+  gap: var(--s-2);
+}
+
+.error {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--pinche);
+}
+
+.pago {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-medio);
+  background: var(--papel-alto);
+}
+
+.pagoTitulo {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+.pagoMedio {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--grafito);
+}
+
+.pagoMarca {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.pagoNota {
+  padding-top: var(--s-2);
+  border-top: var(--hair) dashed var(--papel-borde);
+  font-size: 0.75rem;
+  color: var(--pagado);
+}
+
+/* --- Pasarela ----------------------------------------------------------- */
+
+.pasarela {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-5) var(--s-4);
+  border-radius: var(--r-medio);
+  background: var(--tinta);
+  color: var(--papel);
+  text-align: center;
+}
+
+.pasarelaSello {
+  justify-self: center;
+  padding: 2px var(--s-2);
+  border: var(--hair) solid var(--tinta-borde);
+  border-radius: var(--r-xs);
+  font-family: var(--f-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--humo);
+}
+
+.pasarelaMonto {
+  font-family: var(--f-display);
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.pasarelaRef {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  color: var(--humo);
+}
+
+.pasarelaNota {
+  margin-top: var(--s-2);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--humo);
+}
+
+.aviso {
+  padding: var(--s-3);
+  border-radius: var(--r-chico);
+  background: var(--pinche-lavado);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--tinta);
+}
+
+/* --- Después de pagar --------------------------------------------------- */
+
+.gracias {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-2);
+  padding-block: var(--s-5) var(--s-3);
+  text-align: center;
+}
+
+.graciasTilde {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--pagado-lavado);
+  color: var(--pagado);
+  font-size: 1.25rem;
+}
+
+.graciasTitulo {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.graciasTexto {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--grafito);
+}
+
+.camino {
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-medio);
+}
+
+.caminoPaso {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--s-3);
+  align-items: center;
+  font-size: 0.8125rem;
+  color: var(--grafito);
+}
+
+.caminoMarca {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--papel-borde);
+}
+
+.caminoPaso[data-estado='hecho'] .caminoMarca {
+  background: var(--pagado);
+  border-color: var(--pagado);
+}
+
+.caminoPaso[data-estado='ahora'] .caminoMarca {
+  background: var(--pinche);
+  border-color: var(--pinche);
+}
+
+.caminoPaso[data-estado='ahora'] .caminoNombre {
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.seguimientoNota {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--grafito);
+}
+
+.resumen {
+  display: grid;
+  gap: var(--s-2);
+  padding-top: var(--s-3);
+  border-top: var(--hair) dashed var(--papel-borde);
+}
+
+.resumen p {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--f-mono);
+  font-size: 0.8125rem;
+}

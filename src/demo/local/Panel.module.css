@@ -1,0 +1,311 @@
+/* =========================================================================
+   El panel del local. Es la pantalla de trabajo: lo primero es el pedido y
+   lo último el adorno. Por eso no hay tarjetas de colores ni gráficos arriba:
+   arriba va la plata de hoy en una línea, y abajo las comandas.
+   ========================================================================= */
+
+.panel {
+  display: grid;
+  gap: var(--s-4);
+  align-content: start;
+
+  padding: var(--s-5);
+  border-radius: var(--r-xl);
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+.cabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.titulo {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.local {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  color: var(--grafito);
+}
+
+/* --- La cuenta del día -------------------------------------------------- */
+
+.cuenta {
+  display: grid;
+  /* En un celular entran dos y la tercera baja. Con tres fijas, $ 192.000
+     se parte al medio. */
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap: var(--s-4);
+
+  padding: var(--s-4);
+  border-radius: var(--r-medio);
+  background: var(--papel-alto);
+}
+
+.cuenta dt {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+.cuenta dd {
+  margin-top: 2px;
+  font-family: var(--f-display);
+  font-size: clamp(1.25rem, 1rem + 1.2vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.cuentaPlata {
+  color: var(--pagado);
+}
+
+/* --- Semáforo de estados ------------------------------------------------ */
+
+.semaforo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.semaforoItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+
+  padding: var(--s-2) var(--s-3);
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-pill);
+
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+.semaforoItem b {
+  font-size: 0.75rem;
+  color: var(--tinta);
+}
+
+.semaforoItem[data-estado='nuevo'][data-hay='si'] b {
+  color: var(--pinche);
+}
+
+/* --- Las comandas ------------------------------------------------------- */
+
+.lista {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.vacio {
+  padding: var(--s-6) var(--s-4);
+  border: var(--hair) dashed var(--papel-borde);
+  border-radius: var(--r-medio);
+  font-size: 0.875rem;
+  color: var(--grafito);
+  text-align: center;
+}
+
+.comanda {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-medio);
+  background: var(--papel-alto);
+}
+
+/* El pedido del visitante es el que acaba de entrar: se marca como lo marca
+   el panel de verdad, para que no se pierda entre los que ya estaban. */
+.comandaPropia {
+  border-color: var(--pinche);
+  box-shadow: 0 0 0 3px var(--pinche-lavado);
+}
+
+.comandaCabecera {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.numero {
+  font-family: var(--f-display);
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.hora {
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  color: var(--grafito);
+}
+
+.estado {
+  margin-inline-start: auto;
+  padding: 2px var(--s-3);
+  border-radius: var(--r-pill);
+  background: var(--papel-quemado);
+
+  font-family: var(--f-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+}
+
+.estado[data-estado='nuevo'] {
+  background: var(--pinche);
+  color: var(--papel-alto);
+}
+
+.estado[data-estado='entregado'] {
+  background: var(--pagado-lavado);
+  color: var(--pagado);
+}
+
+.quien {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.como {
+  font-size: 0.75rem;
+  color: var(--grafito);
+}
+
+.lineas {
+  display: grid;
+  gap: var(--s-2);
+  margin-top: var(--s-2);
+  padding-top: var(--s-3);
+  border-top: var(--hair) dashed var(--papel-borde);
+}
+
+.linea {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr) auto;
+  gap: var(--s-3);
+  align-items: baseline;
+  font-size: 0.8125rem;
+}
+
+.cantidad {
+  font-family: var(--f-mono);
+  font-weight: 600;
+  text-align: center;
+  color: var(--pinche);
+}
+
+.plato {
+  min-width: 0;
+}
+
+/* La aclaración es lo que la cocina tiene que leer sí o sí: va abajo del
+   plato y no al final de la línea, donde se pierde. */
+.nota {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  font-style: normal;
+  color: var(--pinche);
+}
+
+.importe {
+  font-family: var(--f-mono);
+  font-size: 0.75rem;
+  color: var(--grafito);
+}
+
+.comandaPie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+
+  margin-top: var(--s-2);
+  padding-top: var(--s-3);
+  border-top: var(--hair) solid var(--papel-borde);
+}
+
+.cobrado {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--f-mono);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.sello {
+  padding: 2px var(--s-2);
+  border-radius: var(--r-xs);
+  background: var(--pagado-lavado);
+
+  font-size: 0.5625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--pagado);
+}
+
+.avanzar {
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--r-pill);
+  background: var(--tinta);
+  color: var(--papel);
+
+  font-family: var(--f-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+}
+
+.avanzar:hover {
+  background: var(--tinta-alto);
+}
+
+/* --- Cerrados ----------------------------------------------------------- */
+
+.cerrados {
+  display: grid;
+  gap: var(--s-2);
+  padding-top: var(--s-3);
+  border-top: var(--hair) dashed var(--papel-borde);
+}
+
+.cerradosTitulo {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}
+
+.cerradoFila {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-3);
+  font-size: 0.8125rem;
+  color: var(--grafito);
+}
+
+@media (min-width: 1040px) {
+  .panel {
+    max-height: min(74vh, 820px);
+    overflow-y: auto;
+  }
+}

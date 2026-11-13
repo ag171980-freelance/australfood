@@ -1,0 +1,216 @@
+/* =========================================================================
+   El tablero del demo: los dos lados del mostrador en la misma pantalla.
+
+   El fondo es tinta para que las dos superficies de papel (el teléfono del
+   cliente y el panel del local) se lean como dos objetos sobre una mesa, y
+   no como dos secciones de una página.
+   ========================================================================= */
+
+.demo {
+  min-height: 100dvh;
+  padding-bottom: var(--s-7);
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+/* Las superficies claras recuperan el rojo del foco: el papel lo contrasta
+   bien y es el color del sistema. Sobre tinta manda la regla global. */
+.telefono :focus-visible,
+.lado :focus-visible {
+  outline-color: var(--pinche);
+}
+
+/* --- Barra -------------------------------------------------------------- */
+
+.barra {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+
+  width: min(100% - var(--gutter) * 2, 1400px);
+  margin-inline: auto;
+
+  /* El aire de abajo lo pone la barra: era de la aclaración que estaba acá. */
+  padding-block: var(--s-4) var(--s-6);
+}
+
+.volver,
+.recorrido {
+  flex: 0 0 auto;
+  padding: var(--s-2) var(--s-4);
+  border: var(--hair) solid var(--tinta-borde);
+  border-radius: var(--r-pill);
+
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--humo);
+
+  transition:
+    color var(--d-rapido) var(--e-papel),
+    border-color var(--d-rapido) var(--e-papel);
+}
+
+.volver:hover,
+.recorrido:hover {
+  color: var(--papel);
+  border-color: var(--humo);
+}
+
+.recorrido {
+  margin-inline-start: auto;
+}
+
+.marca {
+  font-family: var(--f-display);
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.austral {
+  color: var(--pinche);
+}
+
+/* El sello de demo va pegado a la marca: lo que se está mirando no es el
+   sitio de un local, y eso no se dice una sola vez y abajo de todo. */
+.sello {
+  margin-inline-start: var(--s-3);
+  padding: 2px var(--s-2);
+  border: var(--hair) solid var(--tinta-borde);
+  border-radius: var(--r-xs);
+
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: var(--tr-label);
+  color: var(--humo);
+  vertical-align: 3px;
+}
+
+/* En un celular los tres bloques de la barra no entran en un renglón: la
+   marca se va sola arriba y los dos botones quedan abajo, uno en cada punta,
+   con el rótulo recortado a lo que se entiende igual. */
+@media (max-width: 620px) {
+  .barra {
+    flex-wrap: wrap;
+    row-gap: var(--s-3);
+  }
+
+  .marca {
+    order: -1;
+    width: 100%;
+  }
+
+  .largo {
+    display: none;
+  }
+}
+
+/* --- Pestañas (sólo en pantallas angostas) ------------------------------ */
+
+.pestanas {
+  display: flex;
+  gap: var(--s-2);
+  width: min(100% - var(--gutter) * 2, 1400px);
+  margin: 0 auto var(--s-5);
+}
+
+.pestana {
+  flex: 1;
+  padding: var(--s-3);
+  border: var(--hair) solid var(--tinta-borde);
+  border-radius: var(--r-medio);
+
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--humo);
+}
+
+.pestanaActiva {
+  background: var(--tinta-alto);
+  border-color: var(--humo);
+  color: var(--papel);
+}
+
+.punto {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-inline-start: var(--s-2);
+  border-radius: 50%;
+  background: var(--pinche);
+  vertical-align: 1px;
+}
+
+/* --- Tablero ------------------------------------------------------------ */
+
+.tablero {
+  display: grid;
+  gap: var(--s-6);
+  width: min(100% - var(--gutter) * 2, 1400px);
+  margin-inline: auto;
+}
+
+.lado {
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+  min-width: 0;
+}
+
+.rotulo {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--humo);
+}
+
+/* El marco de teléfono no es decoración: es lo que hace entender de un
+   vistazo que esa mitad no es la página, es lo que el cliente tiene en la
+   mano. Abajo de 1040px se va, porque ahí la pantalla ya es un teléfono. */
+.telefono {
+  border-radius: var(--r-xl);
+  background: var(--papel);
+  overflow: hidden;
+}
+
+.pantalla {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* --- Dos lados a la vez ------------------------------------------------- */
+
+@media (min-width: 1040px) {
+  .pestanas {
+    display: none;
+  }
+
+  .tablero {
+    grid-template-columns: minmax(0, 24rem) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .telefono {
+    height: min(74vh, 820px);
+    border: 10px solid var(--tinta-alto);
+    box-shadow: var(--sombra-flotante);
+  }
+}
+
+/* --- Un lado por vez ---------------------------------------------------- */
+
+@media (max-width: 1039px) {
+  .tablero[data-vista='cliente'] .lado:last-child,
+  .tablero[data-vista='local'] .lado:first-child {
+    display: none;
+  }
+}

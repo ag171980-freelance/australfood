@@ -1,0 +1,132 @@
+/* =========================================================================
+   El recorrido guiado. El globo está hecho del mismo papel que las comandas
+   y el foco es un recorte en el telón, no un borde de colores encima.
+   ========================================================================= */
+
+.tour {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+}
+
+.telon {
+  position: absolute;
+  inset: 0;
+}
+
+.telonOscuro {
+  background: rgba(22, 19, 15, 0.55);
+}
+
+/* El recorte: una caja transparente con una sombra enorme que pinta todo lo
+   de afuera. Más barato y más nítido que cuatro paneles calzados al borde. */
+.foco {
+  position: fixed;
+  z-index: 1;
+  border-radius: var(--r-medio);
+  box-shadow: 0 0 0 9999px rgba(22, 19, 15, 0.6);
+  outline: 2px solid var(--pinche);
+  outline-offset: 0;
+  pointer-events: none;
+  transition:
+    top var(--d-rapido) var(--e-papel),
+    left var(--d-rapido) var(--e-papel),
+    width var(--d-rapido) var(--e-papel),
+    height var(--d-rapido) var(--e-papel);
+}
+
+.globo {
+  position: fixed;
+  z-index: 2;
+  display: grid;
+  gap: var(--s-2);
+
+  padding: var(--s-5);
+  border-radius: var(--r-medio);
+  background: var(--papel-alto);
+  color: var(--tinta);
+  box-shadow: var(--sombra-flotante);
+}
+
+/* Recibe el foco por programa para que el lector de pantalla lo lea. No es
+   un control, así que no lleva anillo: los botones de adentro sí. */
+.globo:focus {
+  outline: none;
+}
+
+.globoCentro {
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: min(26rem, calc(100vw - 2rem));
+  text-align: center;
+}
+
+.contador {
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--pinche);
+}
+
+.titulo {
+  font-family: var(--f-display);
+  font-size: 1.375rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.texto {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--grafito);
+}
+
+.botones {
+  display: flex;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
+
+.globoCentro .botones {
+  justify-content: center;
+}
+
+.atras {
+  padding: var(--s-2) var(--s-4);
+  border: var(--hair) solid var(--papel-borde);
+  border-radius: var(--r-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+.seguir {
+  flex: 1;
+  padding: var(--s-2) var(--s-5);
+  border-radius: var(--r-pill);
+  background: var(--pinche);
+  color: var(--papel-alto);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.globoCentro .seguir {
+  flex: 0 0 auto;
+}
+
+.seguir:hover {
+  background: var(--pinche-hover);
+}
+
+.saltar {
+  justify-self: center;
+  padding-top: var(--s-2);
+  font-family: var(--f-mono);
+  font-size: 0.625rem;
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--grafito);
+}

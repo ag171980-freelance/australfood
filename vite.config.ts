@@ -30,5 +30,16 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+
+    /* Dos páginas y no una sola aplicación con router: la landing y el demo
+       no comparten nada más que los tokens, y así el visitante que entra a
+       leer no se baja el demo entero. En el servidor son dos carpetas, sin
+       necesidad de reescribir rutas. */
+    rollupOptions: {
+      input: {
+        principal: 'index.html',
+        demo: 'demo/index.html',
+      },
+    },
   },
 })

@@ -15,7 +15,7 @@ export function InvitacionDemo() {
       centrado
     >
       <div className={css.invitacion}>
-        <BotonLink className={css.cta} href="/demo" grande>
+        <BotonLink className={css.cta} href="./demo/" grande>
           Entrar al demo
         </BotonLink>
       </div>
