@@ -103,19 +103,69 @@
 
 /* --- Botón de menú móvil ------------------------------------------------- */
 
+/* Tres barras en CSS y no un icono de librería: el proyecto no tiene
+   dependencias de interfaz y esto son dos pseudo-elementos. Toman el color
+   del nav con currentColor, así que acompañan el cambio de crema a tinta
+   cuando el nav se pega. */
 .hamburguesa {
   display: none;
   margin-inline-start: auto;
-  padding: var(--s-3);
-  font-family: var(--f-mono);
-  font-size: var(--t-xs);
-  letter-spacing: var(--tr-label);
-  text-transform: uppercase;
+
+  /* 44px de lado: el mínimo que se puede tocar con el pulgar sin errarle. */
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+}
+
+.barras,
+.barras::before,
+.barras::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition:
+    transform var(--d-rapido) var(--e-papel),
+    background-color var(--d-rapido) var(--e-papel);
+}
+
+.barras {
+  position: relative;
+}
+
+.barras::before,
+.barras::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.barras::before {
+  top: -6px;
+}
+
+.barras::after {
+  top: 6px;
+}
+
+/* Abierto, las barras se cruzan: el botón dice en qué estado está el panel,
+   que es lo que antes decía la palabra 'Cerrar'. La del medio se apaga. */
+.cruz .barras {
+  background-color: transparent;
+}
+
+.cruz .barras::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.cruz .barras::after {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 @media (max-width: 880px) {
   .hamburguesa {
-    display: block;
+    display: grid;
   }
 
   .enlaces {

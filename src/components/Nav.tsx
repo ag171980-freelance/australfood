@@ -42,13 +42,17 @@ export function Nav() {
             <span className={css.austral}>Austral</span>Food
           </a>
 
+          {/* El rótulo sigue existiendo para lectores de pantalla y para control
+              por voz: lo que se va es el texto a la vista, no el nombre del
+              botón. Las barras son decorativas y quedan fuera del árbol. */}
           <button
-            className={css.hamburguesa}
+            className={[css.hamburguesa, abierto && css.cruz].filter(Boolean).join(' ')}
             onClick={() => setAbierto((v) => !v)}
             aria-expanded={abierto}
             aria-controls="menu-nav"
           >
-            {abierto ? 'Cerrar' : 'Menú'}
+            <span className={css.barras} aria-hidden="true" />
+            <span className="solo-lectores">{abierto ? 'Cerrar' : 'Menú'}</span>
           </button>
 
           <div
