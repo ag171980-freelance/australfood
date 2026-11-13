@@ -16,6 +16,13 @@ html {
   scroll-behavior: smooth;
   /* La nav queda fija: el ancla no puede terminar debajo. */
   scroll-padding-top: 5.5rem;
+
+  /* Red de contención contra el scroll lateral, en el elemento raíz y no en
+     el body: 'overflow-x: hidden' en el body no corta el scroll del viewport
+     en mobile, así que un desborde de pocos píxeles deja la página
+     arrastrable de costado. 'clip' no crea contenedor de scroll, así que el
+     recorte no es arrastrable. No reemplaza arreglar el desborde: lo tapa. */
+  overflow-x: clip;
 }
 
 body {
@@ -26,7 +33,10 @@ body {
   line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+
+  /* Una palabra que no entre en su columna corta antes de empujar el ancho
+     de la página. */
+  overflow-wrap: break-word;
 }
 
 img,
